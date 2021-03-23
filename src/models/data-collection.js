@@ -10,16 +10,16 @@ class DataCollection {
 
   create(objectDetails) {
     let newRecord = new this.model(objectDetails);
-    newRecord.save((err, record) => {
+    newRecord.save((err) => {
       if (err) { databaseError(err) }
-      return record;
     })
+    return newRecord;
   }
 
   get(id) {
     if (id) {
-      return this.model.findOneById({ id }, (err, record) => {
-        if (err){ databaseError(err) }
+      return this.model.findById({ _id: id }, (err, record) => {
+        if (err){ this.databaseError(err) }
         return record;
       })
     } else {
@@ -32,18 +32,19 @@ class DataCollection {
 
   update(id, record) {
     // new option here returns the updated record instead of the old one
-    return this.model.findOneByIdAndUpdate({ id, record, { new: true } }, (err, record) => {
+    return this.model.findByIdAndUpdate(id, record, { new: true }, (err, record) => {
       if (err){ databaseError(err) }
     })
   }
 
   delete(id) {
-    return this.model.findOneByIdAndDelete({ id }), (err, record) => {
+    return this.model.findOneAndDelete({ _id: id}, {new: false}, (err, record) => {
       if (err){ databaseError(err) }
-    }
+      return record;
+    })
   }
 
-  const databaseError = (err) => {
+  databaseError (err) {
     throw new Error('Database Error!');
   }
 

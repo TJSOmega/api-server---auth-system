@@ -30,21 +30,20 @@ aclRouter.param('model', (req, res, next) => {
       models.set(modelName, new Collection(model));
       req.model = models.get(modelName);
       next();
-    }
-    else {
+    } else {
       next('Invalid model parameter');
     }
   }
 })
 
 // tokens are required on all model routes
-aclRouter = user(bearerAuth);
+aclRouter.use(bearerAuth);
 
 // anyone with a valid token can use get methods
 aclRouter.get('/:model', handleGet);
 aclRouter.get('/:model/:id', handleGet);
 // restricted to users with CREATE capability
-aclRouter.post('/:model/', restrict('create'), handleCreate);
+aclRouter.post('/:model', restrict('create'), handleCreate);
 // restricted to users with UPDATE capability
 aclRouter.put('/:model/:id', restrict('update'), handleUpdate);
 aclRouter.patch('/:model/:id', restrict('update'), handleUpdate);
