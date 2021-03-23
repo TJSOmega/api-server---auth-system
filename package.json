@@ -1,24 +1,29 @@
 {
   "name": "api-server---auth-system",
   "version": "1.0.0",
-  "description": "",
+
+  "description": "Node Express Mongoose app with simple login/logout and acl controlled route accesss",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
     "start": "node index.js"
+
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TJSOmega/api-server---auth-system.git"
   },
+
   "keywords": [],
-  "author": "",
+    "author": "Davion, Anne, TJ, Dawit",
+
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/TJSOmega/api-server---auth-system/issues"
   },
   "homepage": "https://github.com/TJSOmega/api-server---auth-system#readme",
   "dependencies": {
+
     "@code-fellows/supergoose": "^1.0.11",
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.1",
@@ -27,7 +32,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.2",
     "morgan": "^1.10.0",
-    "supergoose": "^0.2.6",
     "supertest": "^6.1.3"
   }
 }
