@@ -41,9 +41,9 @@ users.statics.authenticateBasic = async function (username, password) {
 
 users.statics.authenticateWithToken = async function (token) {
   try {
-    const parsedToken = jwt.verify(token, process.env.SECRET);
-    const user = this.findOne({ username: parsedToken.username})
-    if (user) {return user;}
+    const parsedToken = await jwt.verify(token, process.env.SECRET);
+    const user = await this.findOne({ username: parsedToken.username })
+    if (user) { return user; }
     throw new Error('User Not Found');
   } catch (e) {
     throw new Error(e.message)
@@ -51,4 +51,3 @@ users.statics.authenticateWithToken = async function (token) {
 }
 
 module.exports = mongoose.model('users', users)
-
