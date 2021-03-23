@@ -8,6 +8,18 @@ const basicAuth = require('./middleware/basic.js')
 const bearerAuth = require('./middleware/bearer.js')
 const permissions = require('./middleware/acl.js')
 
+authRouter.get('/', (req, res) => {
+  res.render(process.cwd() + '/src/views/index.ejs');
+});
+
+authRouter.get('/signin', (req, res) => {
+  res.render(process.cwd() + '/src/views/signin.ejs');
+})
+
+authRouter.get('/signup', (req, res) => {
+  res.render(process.cwd() + '/src/views/signup.ejs');
+})
+
 authRouter.post('/signup', async (req, res, next) => {
   try {
     let user = new User(req.body);
@@ -28,6 +40,8 @@ authRouter.post('/signin', basicAuth, (req, res) => {
     token: req.user.token
   };
   res.status(200).json(user);
+  // you could change this to something like res.redirect(/notes)
+  // and that SHOULD return all the notes in json (unless you write a view for it)
 });
 
 authRouter.get('/users', bearerAuth, async (req, res) => {

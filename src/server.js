@@ -11,6 +11,8 @@ const notFound = require('./error-handlers/404.js');
 const errorHandler = require('./error-handlers/500.js');
 
 const app = express();
+
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authRouter);
