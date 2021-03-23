@@ -13,7 +13,6 @@ authRouter.get('/', (req, res) => {
 });
 
 authRouter.get('/signin', (req, res) => {
-  // req.headers.set({username: req.body.username, password})
   res.render(process.cwd() + '/src/views/signin.ejs');
 })
 
