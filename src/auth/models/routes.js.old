@@ -1,0 +1,43 @@
+'use strict';
+
+const express = require('express');
+const authRouter = express.Router()
+
+const User = require('./users.js')
+const basicAuth = require('../middleware/basic.js')
+const bearerAuth = require('../middleware/bearer.js')
+const permissions = require('../middleware/acl.js')
+
+authRouter.post('/signup', async (req, res, next) => {
+  try {
+    let user = new User(req.body);
+    const record = await user.save();
+    const output = {
+      user: record,
+      token: record.token
+    };
+
+    req.session.auth = record.token;
+
+    res.status(201).cookie(output)
+  } catch (e) {
+    next(e.message)
+  }
+});
+
+authRouter.post('/signin', basicAuth, async (req, res, next) => {
+  const user = {
+    user: req.user,
+    token: req.user.token
+  };
+  req.session.auth = record.token;
+  res.status(200).cookie(user)
+});
+
+
+authRouter.get('/secret', bearerAuth, async (req, res, next) => {
+  res.status(200).send('Welcome to the secret route!')
+});
+
+module.exports = authRouter;
+
