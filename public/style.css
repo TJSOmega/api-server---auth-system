@@ -1,0 +1,21 @@
+html {
+    box-sizing: border-box;
+    background-color: rgb(33, 42, 49);
+  }
+
+body {
+    text-align: center;
+    font-size: 14pt;
+}
+
+form {
+    margin: auto;
+    text-align: center;
+    color: aquamarine;
+}
+
+input, button {
+    border-radius: 5px;
+    padding: 10px;
+}
+
