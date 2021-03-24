@@ -39,6 +39,7 @@ authRouter.post('/signin', basicAuth, (req, res) => {
     user: req.user,
     token: req.user.token
   };
+  console.log(user)
   res.status(200).json(user);
   // you could change this to something like res.redirect(/notes)
   // and that SHOULD return all the notes in json (unless you write a view for it)
